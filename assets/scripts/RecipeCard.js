@@ -117,9 +117,6 @@ class RecipeCard extends HTMLElement {
     //           do not nest an <article> inside another <article>). You should use Template
     //           literals (tempalte strings) and element.innerHTML for this.
    
-   
-    alert(data["imgSrc"]);
-    alert(data.imgSrc);
     art.innerHTML = `
     <img src="${data.imgSrc}"
     alt="${data.imgAlt}">
