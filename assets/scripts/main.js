@@ -72,7 +72,7 @@ function saveRecipesToStorage(recipes) {
   //            header. It is possible in only a single line, but should
   //            be no more than a few lines.
 
-  let strRecipes = JSON.stringify(recipes)
+  let strRecipes = JSON.stringify(recipes);
   //localStorage.getItem("recipes") = strRecipes;
   localStorage.setItem('recipes', strRecipes);
 }
@@ -87,18 +87,18 @@ function initFormHandler() {
   var formElement = document.getElementById("new-recipe");
   // B3. TODO - Add an event listener for the 'submit' event, which fires when the
   //            submit button is clicked
-  formElement.addEventListener('submit', (event) => {
+  formElement.addEventListener('submit', function() {
   // B4. TODO - Create a new FormData object from the <form> element reference above
   var Data = new FormData(formElement);
   // B5. TODO - Create an empty object (I'll refer to this object as recipeObject to
   //            make this easier to read), and then extract the keys and corresponding
   //            values from the FormData object and insert them into recipeObject
   var recipeData = {};
+
   Data.forEach(function(value, key) {
     recipeData[key] = value;
-    console.log(key)
+    
   })
-  Data.data = recipeData;
   // B6. TODO - Create a new <recipe-card> element
     var card = document.createElement('recipe-card');
   // B7. TODO - Add the recipeObject data to <recipe-card> using element.data
@@ -110,14 +110,11 @@ function initFormHandler() {
   //            then save the recipes array back to localStorage
 
     let currReceipes = JSON.parse(localStorage.getItem('recipes'));
-    console.log(currReceipes);
-    if (currReceipes != null){
-      console.log(card);
-      currReceipes.push(card);
-      let strCard = JSON.stringify(card);
-      localStorage.setItem('recipes', strCard);
+    if (currReceipes == null){
+      currReceipes = [];
     }
-  
+    currReceipes.push(recipeData);
+    saveRecipesToStorage(currReceipes);
   });
  
 
@@ -126,7 +123,7 @@ function initFormHandler() {
 
   // B11. TODO - Add a click event listener to clear local storage button
   storageElement.addEventListener('click', function() {
-    alert("hello");
+  
       // B12. TODO - Clear the local storage
     localStorage.clear();
       // B13. TODO - Delete the contents of <main>
